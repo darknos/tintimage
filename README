@@ -1,0 +1,17 @@
+Titanium module to tint an image
+
+Binary inside android/dist/ folder
+
+How to use:
+- create an image (myImage)
+- load a file and put it into a blob variable (blob)
+
+var tintimage = require('miga.tintimage');
+$.myImage.image = tintimage.tint(blob);	// blob will be muliplied with a green color
+
+
+newBlob = function tint(blob) will tint the blob and return a blob again
+
+TODO:
+- tint color as parameter
+- tint mode as parameter

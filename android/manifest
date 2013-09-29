@@ -15,4 +15,4 @@ name: tintimage
 moduleid: miga.tintimage
 guid: 80851f88-f395-48d9-9749-e59a35259695
 platform: android
-minsdk: 3.1.1.GA
+minsdk: 3.1.2.GA

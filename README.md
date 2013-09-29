@@ -8,17 +8,30 @@ Binary inside android/dist/ folder
 Example:
 
   xml:
-    <ImageView id="myImage"/>
+```
+<Alloy>
+	<Window>
+		<ImageView id="img1"></ImageView>
+		<ImageView id="img2"></ImageView>
+		<ImageView id="img_final"></ImageView>
+	</Window>
+</Alloy>
+```
 
   controller:
-    var tintimage = require('miga.tintimage');
-    var f = Ti.Filesystem.getFile('image.jpg');
-    var blob = f.read();
-    $.myImage.image = tintimage.tint(blob,{color:"#ff0000", mode:"multiply"});
+```
+var tint = require("miga.tintimage");
 
+$.img_final.image = tint.tint($.img1.toBlob(), $.img2.toBlob(), {
+    color : "#ff0000", mode1 : "overlay", mode2 : "overlay"
+});
+
+$.index.open();
+
+```
 
 Modes:
-
+```
   add  		Saturate(S + D)  
   clear  	[0, 0]  
   darken  	[Sa + Da - Sa*Da, Sc*(1 - Da) + Dc*(1 - Sa) + min(Sc, Dc)]  
@@ -37,5 +50,5 @@ Modes:
   src_out  	[Sa * (1 - Da), Sc * (1 - Da)]  
   src_oveR  	[Sa + (1 - Sa)*Da, Rc = Sc + (1 - Sa)*Dc]  
   xor  		[Sa + Da - 2 * Sa * Da, Sc * (1 - Da) + (1 - Sa) * Dc]  
-
+```
   see http://developer.android.com/reference/android/graphics/PorterDuff.Mode.html

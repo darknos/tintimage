@@ -7,6 +7,8 @@ import org.appcelerator.kroll.annotations.Kroll;
 import java.util.HashMap;
 
 import org.appcelerator.titanium.TiBlob;
+import org.appcelerator.titanium.view.TiUIView;
+import org.appcelerator.titanium.proxy.TiViewProxy;
 import org.appcelerator.titanium.view.TiDrawableReference;
 
 import android.graphics.Bitmap;
@@ -31,6 +33,14 @@ public class TintimageModule extends KrollModule
 	}
 	
 	
+	
+	private Bitmap tintImage(Bitmap image,Bitmap image2,KrollDict args)	{
+		return Tintimage.tint(image,image2,args);
+	}
+	
+	
+
+	
 	@Kroll.method
 	public TiBlob tint(TiBlob blob,HashMap args) {
 		TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), blob);
@@ -39,5 +49,16 @@ public class TintimageModule extends KrollModule
 		TiBlob result = TiBlob.blobFromImage(img);
 		return result;
 	}
+
+	@Kroll.method
+	public TiBlob tint(TiBlob blob,TiBlob blob2,HashMap args) {
+		TiDrawableReference ref = TiDrawableReference.fromBlob(getActivity(), blob);
+		TiDrawableReference ref2 = TiDrawableReference.fromBlob(getActivity(), blob2);
+		Bitmap img = tintImage(ref.getBitmap(),ref2.getBitmap(),new KrollDict(args));
+	
+		TiBlob result = TiBlob.blobFromImage(img);
+		return result;
+	}
+
 	
 }

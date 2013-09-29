@@ -2,6 +2,9 @@ Titanium module to tint an image
 
 Binary inside android/dist/ folder
 
+![ScreenShot](https://raw.github.com/m1ga/tintimage/master/android/example/demo.jpg)
+
+
 Example:
 
   xml:

@@ -5,13 +5,24 @@ Binary inside android/dist/ folder
 ![ScreenShot](https://raw.github.com/m1ga/tintimage/master/android/example/demo.jpg)
 
 
-Function:
+Functions:
+
+tint
 
 ```
 tint.tint({
   image : img1.toBlob(), imageOverlay : img2.toBlob(), color : "#ff0000", modeColor : "overlay", modeImage : "overlay"
 });
 ```
+
+mask (mask needs to be a transparent png)
+```
+tint.mask({
+  image : img1.toBlob(), mask: img2.toBlob()
+});
+```
+
+
 
 Example:
 
@@ -34,6 +45,13 @@ var tint = require("miga.tintimage");
 // two images and color
 $.img_final.image = tint.tint({
 image : $.img1.toBlob(), imageOverlay : $.img2.toBlob(), color : "#ff0000", modeColor : "overlay", modeImage : "overlay"
+});
+*/
+
+/*
+//mask
+tint.mask({
+  image : img1.toBlob(), mask: img2.toBlob()
 });
 */
 

@@ -7,6 +7,12 @@ image : $.img1.toBlob(), imageOverlay : $.img2.toBlob(), color : "#ff0000", mode
 });
 */
 
+/*
+// mask
+tint.mask({
+  image : img1.toBlob(), mask: img2.toBlob()
+});
+*/
 
 // color overlay
 $.img_final.image = tint.tint({

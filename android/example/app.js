@@ -1,10 +1,18 @@
-var tintimage = require('miga.tintimage');
+var tint = require("miga.tintimage");
 
-var f = Ti.Filesystem.getFile(Ti.Filesystem.resourcesDirectory, "..", "..", 'images', 'image.jpg');
-var blob = f.read();
-
-$.imgAfter.image = tintimage.tint(blob, {
-    color : "#ffff00", mode : "darken"
+/*
+// two images and color
+$.img_final.image = tint.tint({
+image : $.img1.toBlob(), imageOverlay : $.img2.toBlob(), color : "#ff0000", modeColor : "overlay", modeImage : "overlay"
 });
+*/
+
+
+// color overlay
+$.img_final.image = tint.tint({
+    image : $.img1.toBlob(), color : "#ff0000", modeColor : "multiply"
+});
+
+
 
 $.index.open();

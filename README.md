@@ -5,6 +5,14 @@ Binary inside android/dist/ folder
 ![ScreenShot](https://raw.github.com/m1ga/tintimage/master/android/example/demo.jpg)
 
 
+Function:
+
+```
+tint.tint({
+  image : img1.toBlob(), imageOverlay : img2.toBlob(), color : "#ff0000", modeColor : "overlay", modeImage : "overlay"
+});
+```
+
 Example:
 
   xml:
@@ -22,11 +30,20 @@ Example:
 ```
 var tint = require("miga.tintimage");
 
-$.img_final.image = tint.tint($.img1.toBlob(), $.img2.toBlob(), {
-    color : "#ff0000", mode1 : "overlay", mode2 : "overlay"
+/*
+// two images and color
+$.img_final.image = tint.tint({
+image : $.img1.toBlob(), imageOverlay : $.img2.toBlob(), color : "#ff0000", modeColor : "overlay", modeImage : "overlay"
+});
+*/
+
+// color overlay
+$.img_final.image = tint.tint({
+    image : $.img1.toBlob(), color : "#ff0000", modeColor : "multiply"
 });
 
 $.index.open();
+
 
 ```
 

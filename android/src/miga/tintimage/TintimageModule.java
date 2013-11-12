@@ -27,9 +27,12 @@ import android.graphics.ColorMatrixColorFilter;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.PorterDuff.Mode;
 import android.graphics.PorterDuffXfermode;
-
+import android.graphics.Shader;
+import android.graphics.Shader.TileMode;
+import android.graphics.BitmapShader;
+import android.graphics.drawable.BitmapDrawable;
 import org.appcelerator.titanium.view.TiDrawableReference;
-
+import android.graphics.Matrix;
 
 
 @Kroll.module(name="Tintimage", id="miga.tintimage")
@@ -37,6 +40,7 @@ public class TintimageModule extends KrollModule
 {
 	// Standard Debugging variables
 	private static final String LCAT = "TintimageModule";
+	boolean tileImage=true;
 	Activity activity;
 	
 	private static Mode getFilter(String mod){
@@ -144,18 +148,29 @@ public class TintimageModule extends KrollModule
 		return null;
 	}
 	
-	private Bitmap mask(Bitmap image, Bitmap image2) {
-	  int width =  image2.getWidth();
-	  int height =  image2.getHeight();
-	  Bitmap bitmapOut = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
+	private Bitmap mask(Bitmap image, Bitmap mask) {
+	// todo: image wiederholen und skalierung richtig
+	  Bitmap bitmapOut = Bitmap.createBitmap(mask.getWidth(),mask.getHeight(), Bitmap.Config.ARGB_8888);
 	  Canvas canvas = new Canvas(bitmapOut);
 
+	  Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+	  
+	  if (tileImage){
+	    BitmapDrawable background = new BitmapDrawable(image);
+	    //in this case, you want to tile the entire view
+	    background.setBounds(0, 0, mask.getWidth(),mask.getHeight());
+	    background.setTileModeXY(Shader.TileMode.REPEAT, Shader.TileMode.REPEAT);
+	    background.draw(canvas);
+	  } else {
+	    canvas.drawBitmap(image,(int)(mask.getWidth()*0.5 - image.getWidth()*0.5), 0, paint);
+	  }
+
+	  
 	  Paint xferPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-	  //xferPaint.setColor(Color.WHITE);
 	  xferPaint.setXfermode(new PorterDuffXfermode(Mode.DST_IN));
 
-	  canvas.drawBitmap(image, 0, 0, null);
-	  canvas.drawBitmap(image2, 0, 0, xferPaint);
+	  
+	  canvas.drawBitmap(mask, 0, 0, xferPaint);
 	  xferPaint.setXfermode(null);
 	  return bitmapOut;
 	}
